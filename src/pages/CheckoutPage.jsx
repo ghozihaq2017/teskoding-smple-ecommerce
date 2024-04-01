@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { removeFromCartActionCreator } from '../states/cart/action';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import ProductPurchase from '../components/ProductPurchase';
-import { useDispatch, useSelector } from 'react-redux';
 import AddressForm from '../components/AddressForm';
-import { removeFromCartActionCreator } from '../states/cart/action';
+import OrderSummary from '../components/OrderSummary';
 
 function CheckoutPage() {
   const dispatch = useDispatch();
@@ -95,7 +96,7 @@ function CheckoutPage() {
       transferMethod: selectedTransferMethod,
       totalPrice: totalPrice + shippingCost,
     };
-    console.log(detailCheckout);
+    // console.log(detailCheckout);
 
     setDetailCheckout(detailCheckout);
 
@@ -193,91 +194,12 @@ function CheckoutPage() {
               </select>
             </div>
           </div>
-          <div className="order-summary md:w-1/3 w-full md:ml-10 px-5 py-5 mt-10 border-2">
-            <div className="title-order-summary">
-              <h5 className="font-bold text-xl pb-3 w-full border-b-2">Order Summary</h5>
-            </div>
-            <div className="total-order py-5">
-              <div className="subtotal flex justify-between mb-3">
-                <p className="text-base">Subtotal</p>
-                <p className="font-bold">IDR {totalPrice.toLocaleString()}</p>
-              </div>
-              <div className="shipping flex justify-between mb-3">
-                <p>Shipping</p>
-                <p className="font-bold">IDR {shippingCost.toLocaleString()}</p>
-              </div>
-              <div className="total-pay flex justify-between">
-                <p className="font-bold">Total to Pay</p>
-                <p className="font-bold">IDR {(totalPrice + shippingCost).toLocaleString()}</p>
-              </div>
-            </div>
-            <div className="btn-order mb-10">
-              <button
-                className="bg-primary px-8 py-4 w-full text-white font-bold hover:bg-oldPrimary"
-                onClick={handlePlaceOrder}
-              >
-                PLACE ORDER
-              </button>
-              <dialog id="my_modal_4" className="modal">
-                <div className="modal-box bg-white w-11/12 max-w-3xl h-auto">
-                  <h3 className="font-bold text-lg">Konfirmasi Pembayaran</h3>
-                  <div className="checkout-section flex flex-col md:flex-row">
-                    <div className="product-checkout mr-7">
-                      <h5 className="font-bold text-sm mt-2">Products</h5>
-                      <div className="list-product-checkout">
-                        {detailCheckout &&
-                          detailCheckout.productCheckout &&
-                          detailCheckout.productCheckout.map((product) => (
-                            <div key={product.id} className="product-checkout-body mt-1">
-                              <p className="font-bold text-[0.7rem]">
-                                <span>{product.title} </span>x <span>{product.quantity}</span>
-                              </p>
-                              <p className="font-bold text-[0.6rem] mb-2">
-                                Price/pcs: <span>IDR {product.price.toLocaleString('id-ID')}</span>
-                              </p>
-                            </div>
-                          ))}
-                      </div>
-                    </div>
-                    <div className="total-checkout mr-7">
-                      <h5 className="font-bold text-sm mt-2">Total Order</h5>
-                      <div className="list-product-checkout">
-                        <p className="font-bold text-[0.8rem]">
-                          IDR{' '}
-                          {detailCheckout.totalPrice &&
-                            detailCheckout.totalPrice.toLocaleString('id-ID')}
-                        </p>
-                      </div>
-                    </div>
-                    <div className="bank-checkout mr-7">
-                      <h5 className="font-bold text-sm mt-2">Bank Info</h5>
-                      <div className="list-product-checkout">
-                        <p className="font-bold text-[0.8rem]">
-                          {detailCheckout.transferMethod && detailCheckout.transferMethod}
-                        </p>
-                      </div>
-                    </div>
-                    <div className="status-checkout mr-7">
-                      <h5 className="font-bold text-sm mt-2">Status</h5>
-                      <div className="list-product-checkout">
-                        <p className="font-bold text-[0.8rem] bg-primary text-white px-1 py-1 rounded-xl">
-                          Waiting for payment
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <p className="py-4"></p>
-                  <div className="modal-action">
-                    <form method="dialog">
-                      <button className="btn bg-primary text-white border-primary hover:bg-oldPrimary">
-                        Confirm
-                      </button>
-                    </form>
-                  </div>
-                </div>
-              </dialog>
-            </div>
-          </div>
+          <OrderSummary
+            totalPrice={totalPrice}
+            shippingCost={shippingCost}
+            detailCheckout={detailCheckout}
+            handlePlaceOrder={handlePlaceOrder}
+          />
         </div>
       </div>
       <Footer />
