@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.clamp-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.full-text {
+  -webkit-line-clamp: unset;
+}
+
+.loading {
+  position: sticky;
+  top: 0;
+  z-index: 999999999;
+}
