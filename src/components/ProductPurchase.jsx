@@ -1,9 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { RiDeleteBin5Line } from 'react-icons/ri';
 
-function ProductPurchase({ cartItem }) {
+function ProductPurchase({ cartItem, onRemoveFromCart }) {
+  const handleRemoveClick = () => {
+    onRemoveFromCart(cartItem.id);
+  };
+
   return (
-    <div className="product-purchase flex items-center py-6 border-b-2">
+    <div className="product-purchase flex items-center py-6 border-b-2 relative">
       <figure className="max-w-28">
         <img src={cartItem.imageUrl} alt={cartItem.title} />
       </figure>
@@ -15,12 +20,16 @@ function ProductPurchase({ cartItem }) {
           <span>IDR {cartItem.price.toLocaleString('id-ID')}</span>
         </p>
       </div>
+      <button className="button-delete absolute right-0" onClick={handleRemoveClick}>
+        <RiDeleteBin5Line className="hover:text-primary" />
+      </button>
     </div>
   );
 }
 
 ProductPurchase.propTypes = {
   cartItem: PropTypes.objectOf(Array),
+  onRemoveFromCart: PropTypes.func,
 };
 
 export default ProductPurchase;

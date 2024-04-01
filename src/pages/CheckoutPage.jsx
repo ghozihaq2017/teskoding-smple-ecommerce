@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import ProductPurchase from '../components/ProductPurchase';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import AddressForm from '../components/AddressForm';
+import { removeFromCartActionCreator } from '../states/cart/action';
 
 function CheckoutPage() {
+  const dispatch = useDispatch();
   const cart = useSelector((states) => states.cart);
   const address = useSelector((states) => states.address);
 
@@ -16,6 +18,18 @@ function CheckoutPage() {
   const [selectedCourier, setSelectedCourier] = useState('');
   const [selectedTransferMethod, setSelectedTransferMethod] = useState('');
   const [detailCheckout, setDetailCheckout] = useState({});
+
+  // Delete Product From Chart
+  const handleRemoveFromCart = (productId) => {
+    const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+    const index = cartItems.findIndex((item) => item.id === productId);
+
+    if (index !== -1) {
+      cartItems.splice(index, 1);
+      localStorage.setItem('cart', JSON.stringify(cartItems));
+    }
+    dispatch(removeFromCartActionCreator(productId));
+  };
 
   // Itung total harga di keranjang
   useEffect(() => {
@@ -58,7 +72,6 @@ function CheckoutPage() {
 
   const handleCourierChange = (e) => {
     setSelectedCourier(e.target.value);
-    // Other logic if needed
   };
 
   const handlePlaceOrder = () => {
@@ -107,7 +120,11 @@ function CheckoutPage() {
               <h5 className="font-bold text-md pb-3 w-full border-b-2">PURCHASE SUMMARY</h5>
               <div className="container-products-purchase">
                 {cart.map((cartItem) => (
-                  <ProductPurchase key={cartItem.id} cartItem={cartItem} />
+                  <ProductPurchase
+                    key={cartItem.id}
+                    cartItem={cartItem}
+                    onRemoveFromCart={handleRemoveFromCart}
+                  />
                 ))}
               </div>
             </div>
