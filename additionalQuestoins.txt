@@ -1,0 +1,24 @@
+Pertanyaan 
+- Jelaskan pendekatan Anda dalam merencanakan dan mengimplementasikan proyek ini.
+- Bagaimana Anda akan mengatur struktur direktori dan file untuk proyek ini?
+- Bagaimana Anda akan mengelola state aplikasi, terutama dalam hal menangani data produk dan keranjang belanja?
+- Apa yang akan Anda lakukan jika Anda menemui masalah atau hambatan dalam mengembangkan proyek ini?
+
+Jawaban => 
+
+1. Dalam merencanakan dan mengimplementasikan proyek e-commerce app ini terdapat beberapa langkah yang saya gunakan, Pertama saya identifikasi dulu fitur-fitur yang akan saya buat, saya pahami dlu flow logikanya, dan memahami fungsionalitas dari aplikasi yg akan saya buat. Setelah itu saya tentukan teknologi2 apa saja yang akan digunakan, seperti framework css nya, state managemennya, hingga package2 yang akan digunakan. Kemudian saya mencari referensi untuk membuat desain UI nya dikarenakan dalam projek ini tidak ada UI/IX nya, maka saya mencari web e-commerce dan saya jadikan itu sebagai referensi untuk desain web yg akan saya buat. Setelah dipersiapkan saya mulai dengan membangun web dengan data statis, lalu mengatur routingnya, dan terakhir mennggunakan data yg ada dengan state management serta mebuat fungsionalitas tiap komponen pada aplikasi. Oiya saya juga menggunakn github untuk version controlnya dan mendeploy app melalui netlify.
+
+2. Dalam mengatur struktur direktori dan file untuk proyek e-commerce ini saya menggunakan pendekatan yang terstruktur dan mudah dipahami seperti yang sudah saya pelajari, diantaranya:
+- index.js: File yang digunakan untuk merender aplikasi ke dalam DOM.
+- App.js: File utama aplikasi yang berfungsi sebagai titik masuk untuk semua komponen React.
+- components: Direktori untuk menyimpan semua komponen React yang digunakan dalam aplikasi, seperti Navbar, Footer, card product, dll
+- pages: Direktori untuk menyimpan komponen halaman utama aplikasi, seperti homepage.jsx, checkoutpage,jsx dan detailProductPage.jsx
+- states: Direktori untuk mengelola state aplikasi menggunakan Redux, seperti states products, detailProduct, dll
+- assets: Direktori untuk menyimpan semua aset statis
+
+3. Untuk mengelola state aplikasi, terutama dalam hal menangani data produk dan keranjang belanja, saya menggunakan Redux sebagai manajer state global, bisa dilihat pada aplikasi saya terdapat states products dan states cart. Pada folder tersebut tiap states terdapat action dan reducer masing-masing, sehingga state cart dan products bisa saya gunakan di tiap component.
+
+4. Saat saya mengalami masalah atau hambatan dalam mengembangkan proyek ini, saya mengambil beberapa pendekatan untuk mengatasinya:
+- Paling sering saya akan mencoba mencari solusi secara mandiri dengan debuggin kode sendiri seperti menggunakan console, dari di stackoverflow, liat dokumentasi hingga tanya AI. Dengan cara ini, saya dapat meningkatkan pemahaman saya tentang masalah yang dihadapi dan mencari solusi yang sesuai.
+- Kedua saya akan berkonsultasi dengan mentor saya, karena saat ini saya sedang mengikuti bootcamp fullstack web jadi saya memiliki mentor yang ahli yang berpengalaman. Pada project kali ini saya sempat 1 kali berkonsultasi kepada beliau terkait API yang digunakan untuk project ini.
+- Terkahir, ketika saya merasa terjebak atau frustrasi dengan masalah yang sulit dipecahkan, saya akan mengambil istirahat sejenak untuk merefresh pikiran dan mengembalikan fokus saya. 
